@@ -154,8 +154,11 @@ int main(int argc, char* argv[])
     boost::asio::io_service io_service;
 
     tcp::resolver resolver(io_service);
+    std::cout << argv[1] << std::endl;
+    std::cout << argv[2] << std::endl;
     //auto endpoint_iterator = resolver.resolve({ argv[1], argv[2] });
-    chat_client c(io_service, resolver.resolve({ argv[1], argv[2] }));
+    tcp::resolver::query query(argv[1], argv[2]);
+    chat_client c(io_service, resolver.resolve(query));
 
     c.start();
     //boost::thread t(c.start());
